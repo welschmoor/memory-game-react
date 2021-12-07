@@ -1,4 +1,8 @@
+
+
 # Memory Game
+
+![alt text](https://repository-images.githubusercontent.com/435514581/e94626bf-2160-49a6-88a0-8cda25defc57)
 
 The code looks super ugly, but I made it without any reference and it works well.
 
