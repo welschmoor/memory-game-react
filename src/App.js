@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react"
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import { IoIosSunny } from "react-icons/io"
+
 import Mem from "./components/Mem";
+
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -17,7 +20,11 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const lightTheme = {
-
+  bgCol: '#bbbbb8',
+  tileBgCol: "#252424",
+  textCol: "white",
+  titleCol: "#252424",
+  subtitleCol: "#252424",
 }
 
 const darkTheme = {
@@ -53,7 +60,9 @@ function App() {
   const [memState, setMemState] = useState([])
   const [timesClicked, setTimesClicked] = useState(0)
   const [moves, setMoves] = useState(0)
-  const [darkMode, setDarkMode] = useState(false)
+  console.log(localStorage.getItem("memDarkMode"))
+  const [darkMode, setDarkMode] = useState( localStorage.getItem("memDarkMode") === "false" )
+  console.log("darkMode", darkMode)
 
   useEffect(() => {
     newGameBtnHandler()
@@ -64,6 +73,21 @@ function App() {
     setMemState(memsSorted)
     setTimesClicked(0)
     setMoves(0)
+  }
+
+  // save dark mode in local storage
+  // useEffect(() => {
+  //   const darkModeValue = localStorage.getItem("memDarkMode")
+  //   console.log(darkModeValue)
+  //   if (darkModeValue) {
+  //     setDarkMode(darkModeValue)
+  //   }
+  // }, [])
+
+  const darkModeHandler = () => {
+    setDarkMode(p=>!p)
+    localStorage.setItem("memDarkMode", darkMode)
+    
   }
 
   const clickHandler = (name) => {
@@ -133,7 +157,7 @@ function App() {
 
 
   return (
-    <ThemeProvider theme={darkTheme} >
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme} >
       <Wrapper>
         <GlobalStyle />
         <div>
@@ -149,6 +173,7 @@ function App() {
         </GRID>
         <Moves>Moves: {moves}</Moves>
         <NewGameBtn onClick={newGameBtnHandler} >New Game</NewGameBtn>
+        <DarkModeBtn onClick={darkModeHandler}><SunIcon /></DarkModeBtn>
       </Wrapper>
     </ThemeProvider>
   );
@@ -201,5 +226,22 @@ const NewGameBtn = styled.button`
   color: ${p=>p.theme.titleCol};
   padding: 10px 20px;
   font-size: 1rem;
+  &:active {
+    transform: scale(0.97);
+  }
+`
+
+const DarkModeBtn = styled.button`
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+`
+
+const SunIcon = styled(IoIosSunny)`
+  font-size: 2rem;
+  color: ${p=>p.theme.titleCol};
 `
 export default App;
