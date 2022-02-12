@@ -69,7 +69,18 @@ function App() {
   }, [])
 
   const newGameBtnHandler = () => {
-    const memsSorted = [...mems].sort(() => Math.random() - 0.5)
+    function shuffle(array) {
+      let currentIndex = array.length,  randomIndex;
+      while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+      return array;
+    }
+
+    const memsSorted = shuffle(mems)
     setMemState(memsSorted)
     setTimesClicked(0)
     setMoves(0)
