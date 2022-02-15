@@ -211,6 +211,13 @@ const GRID = styled.div`
   align-items: center;
   justify-items: center;
   position: relative;
+
+  @media (max-width: 711px) {
+    grid-template-columns: repeat(4, 100px);
+  }
+  @media (max-width: 456px) {
+    grid-template-columns: repeat(4, 70px);
+  }
 `
 
 const Title = styled.h2`

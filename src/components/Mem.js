@@ -24,6 +24,16 @@ const ValueWrapper = styled.div`
   color: ${p=>p.theme.textCol};
   font-size: 5rem;
   cursor: pointer;
+
+  @media (max-width: 711px) {
+    height: 100px;
+    width: 100px;
+  }
+  @media (max-width: 456px) {
+    height: 70px;
+    width: 70px;
+    font-size: 4rem;
+  }
 `
 
 const HidePlane = styled.div`
